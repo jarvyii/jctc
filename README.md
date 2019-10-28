@@ -10,7 +10,7 @@ Screen will show traveler information necessary to perform job. Inquiry Screen w
 
 * PHP
 * MySQL/DB2
-* HTML, CSS, JavaScript, JQuery, Bootstrap: For front end
+* HTML, CSS, JavaScript, JQuery, JSON, Bootstrap: For front end
 
 ## Features
 
@@ -27,11 +27,6 @@ Screen will show traveler information necessary to perform job. Inquiry Screen w
     * Scan Bard code
     * Operator
     * Machine
-
-  * Should ensure that
-    * URL is legitimate
-    * Expiration is not in the past
-    * No duplicate deals (Maybe?)
 * Tracking Inquiry Display
   * Show order information
     * Order Number
