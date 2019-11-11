@@ -17,13 +17,13 @@
         <!-- Main jumbotron for a  Logo Image about the Company-->
             <div class="container">
               <div class="jumbotron bg-white" id="jumbotron">
-                  <img class="img-responsive img-fluid mx-auto d-block" width="60%" height="52" src="img/flexiblematerial-bl.png"  alt="Flexible Material">
+                  <img class="img-responsive img-fluid mx-auto d-block" width="60%" height="52" src="img/jarv.png"  alt="Jarv Material">
               </div> <!-- /jumbotron -->
             </div> <!-- /Container-->
       </div>
       <div class="container">
             <!-- Login form. It validate the User and password with the file USERS.JSON -->
-            <form id="loginform" method="post" action="php/login.php" runat="server">
+            <form id="loginform" method="post" action="php/inquiry.php" runat="server">
                   <input type="hidden" name="inquiry" value="Login"/>
                   <div class="imgcontainer">
                       <img src="img\login.jpg" alt="Login now" class="avatar">
@@ -47,7 +47,7 @@
       </div>
       <div class="footer">
            <!-- Copyright -->
-            &copy; 2019 Inquiry System 1.0 &amp; <a id="user-nav" href="//www.minimaxinfo.com" target="_blank">mini-MAX Information Systems, Inc.</a>
+            &copy; 2019 Inquiry System 1.0 &amp; <a id="user-nav" href="https://www.linkedin.com/in/jareynaldo/" target="_blank">Jose A Reynaldo, Inc.</a>
            <!-- Copyright -->
       </div>
     <script src="js/inquiry.js"></script>

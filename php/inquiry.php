@@ -9,19 +9,19 @@ function Head()
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="//printjs-4de6.kxcdn.com/print.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css"> 
+   <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="../css/inquiry.css">
-  
+
     </head>
    <body id="home">
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
        <div class="jumbotron bg-white" id="jumbotron">
-           <img class="img-responsive  img-fluid mx-auto d-block" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+           <img class="img-responsive  img-fluid mx-auto d-block" width="60%" height="52" src="../img/jarv.png"  alt="Jarv Material">
        </div> <!-- /jumbotron -->
      </div> <!-- /Container-->
 <?php
@@ -81,7 +81,7 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
   <label></label><br>
   <div class="footer">
            <!-- Copyright -->
-            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="https://www.linkedin.com/in/jareynaldo/" target="_blank"> &amp; <bold>Jose A Reynaldo, Inc.</bold></a>
            <!-- Copyright -->
       </footer>
   <script src="../js/inquirydisplay.js"></script>
@@ -148,7 +148,7 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
              <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>
         </div>
     </form>
-       
+
     <?php
     // tiBody();
    ?>
@@ -156,7 +156,7 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
   </div>
   <div class="footer">
            <!-- Copyright -->
-            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="https://www.linkedin.com/in/jareynaldo/" target="_blank"> &amp; <bold>Jose A Reynaldo, Inc.</bold></a>
            <!-- Copyright -->
   </footer>
    <script src="../js/inquiryinformation.js"></script>
@@ -190,10 +190,10 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
               </div>
           </div>
         </div>
-  </form> 
+  </form>
   <div class="footer">
        <!-- Copyright -->
-      &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+      &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="https://www.linkedin.com/in/jareynaldo/" target="_blank"> &amp; <bold>Jose A Reynaldo, Inc.</bold></a>
       <!-- Copyright -->
   </footer>
 
@@ -214,7 +214,7 @@ function Tracking($UserName) {
           <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus><br>
           <label class="label-tracking" for="machine">Machine:</label>
           <select name="machine" id="machine" required>
-          </select><br> 
+          </select><br>
           <label class="label-tracking" for="operator">Operator:</label>
           <input class="input-tracking" type="text" name = "operator" id="operator" size ="15" placeholder="Operator" required><br>
           <div class="row button-tracking">
@@ -229,7 +229,7 @@ function Tracking($UserName) {
   </form>
   <div class="footer">
            <!-- Copyright -->
-            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="https://www.linkedin.com/in/jareynaldo/" target="_blank"> &amp; <bold>Jose A Reynaldo, Inc.</bold></a>
            <!-- Copyright -->
       </footer>
   <script src="../js/inquiry.js"></script>
