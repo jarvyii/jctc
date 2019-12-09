@@ -5,7 +5,7 @@ $(document).ready(function(){
  FUNCTION setOrderHeader()
 ***************************************************************/
 function setOrderHeader( ){
-  /********************************************************  
+  /********************************************************
 
     =====>  This is for JavaScript
 
@@ -34,7 +34,7 @@ function setOrderHeader( ){
 
        ====> This is for PHP
 
-         
+
       if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -153,7 +153,7 @@ function setOrderHeader( ){
   } // / function setOrderBody()
 
 function  showHistoric(){
-               
+
           if (window.XMLHttpRequest) {
                xmlhttp = new XMLHttpRequest();
             }else {
@@ -162,33 +162,50 @@ function  showHistoric(){
             xmlhttp.onreadystatechange = function() {
                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                  // document.getElementById("output").innerHTML = xmlhttp.responseText;
+                 sLabel = "<span class="; // beginning of the span
+                 sTitle ="'displaycolumn'>"; //Name of the class for the column Title
+                 gContent ="'grillecolumn'>"; // Name of the Class for grille conetnt
+                 eLabel = "<br></span>";  // closing SPAN Tag
                  myObj = JSON.parse(this.responseText);
-                 txtLHMACH=txtLHOPER = txtLHQTY=txtLHSTRDTTIM=txtElapsedTime= txtLHSTPDTTIM="";
+                 txtLHMACH=sLabel+ sTitle+"Machine"+eLabel+sLabel+gContent;
+                 txtLHOPER = sLabel+sTitle+"Operator"+eLabel+sLabel+gContent;
+                 txtLHQTY=sLabel+sTitle+"Qty."+eLabel+sLabel+gContent;
+                 //"<span class="+"'displaycolumn'"+">Quantity</span><br>";
+                 txtLHSTRDTTIM=sLabel+sTitle+"Start Time"+eLabel+sLabel+gContent;
+                 txtElapsedTime= sLabel+sTitle+"E. Time"+eLabel+sLabel+gContent;
+                 txtLHSTPDTTIM=sLabel+sTitle+"Stop Time"+eLabel+sLabel+gContent;
+                 txtLHSOVR =sLabel+sTitle+"Override"+eLabel+sLabel+gContent;
+                txtLHCOMM = sLabel+sTitle+"Comments"+eLabel+sLabel+gContent;
                  for (x in myObj) {
                       txtLHMACH += myObj[x].MACHDESC + "<br>";
                       txtLHOPER += myObj[x].LHOPER+ "<br>";
                       txtLHQTY += myObj[x].LHQTY+ "<br>";
-                      txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,16)+ "<br>";
-                      txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,16)+ "<br>";
+                      txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,19)+ "<br>";
+                      txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,19)+ "<br>";
+                      txtLHSOVR += myObj[x].LHSOVR+ "<br>";
+                      txtLHCOMM += myObj[x].LHCOMM+ "<br>";
                       s= myObj[x].LHSTRDTTIM;
                       var startDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                       s= myObj[x].LHSTPDTTIM;
                       var stopDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                      // var elapsedtime = (stopDate.getTime() - startDate.getTime())/(1000*60*60*24);
-                     var Days = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60/24);
+                     //var Days = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60/24);
                      var Hours = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60);
                      var Minutes = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60);
-                      var elapsedtime = Days+"d:"+Hours+"h:"+Minutes+"m";
-                      txtElapsedTime += elapsedtime+ "<br>";
+                     var Seconds = Math.trunc( Math.round(((stopDate.getTime() - startDate.getTime())/1000)) % 60);
+                     var elapsedtime = Hours+"h:"+Minutes+"m:"+Seconds+"s";
+                     txtElapsedTime += elapsedtime+ "<br>";
 
-                      
+
                   }
-                 document.getElementById("machinecolumn").innerHTML += txtLHMACH;
-                document.getElementById("operator").innerHTML += txtLHOPER;
-                document.getElementById("qty").innerHTML += txtLHQTY;
-                document.getElementById("startdate").innerHTML += txtLHSTRDTTIM;
-                document.getElementById("stopdate").innerHTML += txtLHSTPDTTIM;
-                document.getElementById("elapsedtime").innerHTML += txtElapsedTime;
+                 document.getElementById("machinecolumn").innerHTML += txtLHMACH+ eLabel;
+                document.getElementById("operator").innerHTML += txtLHOPER+ eLabel;
+                document.getElementById("qty").innerHTML += txtLHQTY+ eLabel;
+                document.getElementById("startdate").innerHTML += txtLHSTRDTTIM+ eLabel;
+                document.getElementById("stopdate").innerHTML += txtLHSTPDTTIM+ eLabel;
+                document.getElementById("elapsedtime").innerHTML += txtElapsedTime+ eLabel;
+                document.getElementById("override").innerHTML += txtLHSOVR+ eLabel;
+                document.getElementById("comment").innerHTML += txtLHCOMM+ eLabel;
                 // alert( myObj);
                  /*
                  console.log('My object : ' + Values);
@@ -199,9 +216,13 @@ function  showHistoric(){
                   alert(output);*/
                }
             }
-            str = "Display&order="+document.getElementById("ordernumber").value;
-            xmlhttp.open("GET","../php/ControllerInquiry.php?q="+str,true);
-            xmlhttp.send();
+            var Order = document.getElementById("ordernumber").value+"&line=1";
+
+         //  var str = "http:../php/ControllerInquiry.php?q=Display&order="+Order;
+           //var url = new URL(str);
+           xmlhttp.open("GET","../php/ControllerInquiry.php?q=Display&order="+Order,true);
+       //   xmlhttp.open("GET",url,true);
+           xmlhttp.send();
 }
 
   /*********************************************************************************

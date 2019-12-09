@@ -6,7 +6,7 @@
  * @author      Jose A Reynaldo
  *
  */
-class Login
+class Login extends DataAccess
 {
 	public $sessid, $TIMEI, $TIMEX, $TIMEO, // Current running values
 					$DTTIMEI, $DTTIMEX, $DTTIMEO, $ACTIVITY, // Perm. Set Values
@@ -24,7 +24,7 @@ class Login
 		//$this->server	= 'C702B9F0'; // Change this based of AS400 System value
 		$this->debug 	= array();
 		$this->error 	= false;
-		$this->setUp();
+	//	$this->setUp();
 	}
 	/////////////////////////////////////////////////////////////////////////
 	protected function setUp()

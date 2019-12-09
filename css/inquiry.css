@@ -21,15 +21,38 @@ body {
   margin-left: 15%;
   width: 60%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 15%;
+      width: 60%;
+ }
+ .trackingdisplay {
+    margin-left: 10%;
+ }
+ .trackinfo-right {
+     margin-right: 3%;
+     width:50%;
+ }
+ .production-info {
+      margin-top: 2%;
+      margin-left: 20%;
+      width: 60%;
+ }
+ .producecontent{
+  margin-left: 0%;
+      width: 100%;
+ }
  .trackingheader {
-  margin-left: 10%;
+    margin-top: 2%;
+    margin-left: 25%;
+    width: 50%;
  }
 .titlecenter {
   text-align:center;
 }
 .processing {
    font-size: 40px;
-   margin-left: 25%;
+   margin-right: 25%;
    width: 50%;
    padding-left: 3%;
    padding-right: 3%;
@@ -41,17 +64,16 @@ body {
   text-align: left;
 }
 .label-inquiry {
-  width:110px;
-  margin-right: 1%;
-  text-align: right;
-}
-.label-tracking {
   width:130px;
   margin-right: 1%;
   text-align: right;
 }
+.label-tracking {
+  margin-right:2%;
+  text-align: left;
+}
 .input-tracking {
-  margin-left: 0%;
+  margin-right: 2%;
 }
 .line-number {
   margin-left: 5%;
@@ -80,7 +102,8 @@ body {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  margin-left: 5%;
+  margin-left: 25%;
+  width:50%;
   }
   .startbutton{
     background-color: green;
@@ -90,10 +113,20 @@ body {
     display: none;
   }
   .trackinginformation{
-    margin-left: 8%;
+    margin-left: 25%;
+    margin-top: 4%;
+    width: 50%;
+  }
+  .label-content{
+    font-weight: bold;
   }
   .quantity{
     margin-left: 10px;
+    width:270px;
+  }
+  .quantityproduced {
+    margin-left: 10px;
+    width:200px;
   }
   .label-information{
     width: 151px;
@@ -112,9 +145,14 @@ body {
   }
   .displaycolumn{
     text-decoration: underline;
+    width: 140px;
+    font-weight: bold;
+  }
+  .datecontent{
+    width: 160px;
   }
   .datecolumn{
-    display:inline-block;
+    display:flex;
   }
   .footer {
     background-color: #8e2938;
@@ -125,8 +163,15 @@ body {
     left: 0;
     bottom: 0;
   }
+  .comment {
+    font-size: 16px;
+    color: #8e2938;
+  }
   a {
-    color: white;
+    /* color: white; */
+  }
+   .container {
+      max-width: 100%;
   }
 /* Small media movil */
 @media ( min-width:320px ){
@@ -136,16 +181,23 @@ body {
    body {
   font-size: 10px;
    }
+.producecontent{
+   margin-left: 0%;
+   width: 100%;
+ }
   .tracking {
       margin-top: 2%;
-      margin-left: 5%;
-      width: 90%;
+      margin-left: 20%;
+      width: 60%;
  }
  .processing {
       font-size: 20px;
       margin-left: 10%;
       width: 80%;
    }
+ .exit-image {
+
+ }
 
 }
 @media ( min-width:358px ){
@@ -153,13 +205,39 @@ body {
   margin-top:1em;
    }
    body {
-      font-size: 10px;
+      font-size: 14px;
    }
+    .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 15%;
+      width: 60%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:80%;
+  }
+  .button-trackinginformation {
+      margin-left: 0%;
+      width:100%;
+  }
    .processing {
       font-size: 22px;
       margin-left: 10%;
       width: 80%;
     }
+    .quantityproduced {
+    margin-left: 10px;
+    width:89px;
+  }
+  .button-tracking {
+      margin-left: 0%;
+      width:100%;
+      padding-right: 0%
+  }
+  .trackingheader {
+    margin-left: 5%;
+    width: 90%;
+ }
 
 }
 /* Small media movil */
@@ -167,11 +245,36 @@ body {
   body {
     font-size: 14px;
   }
+  .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 25%;
+      width: 50%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:80%;
+  }
+  .button-trackinginformation {
+      margin-left: 10%;
+      width:80%;
+  }
   .processing {
     font-size: 30px;
     margin-left: 10%;
     width: 80%;
   }
+  .quantityproduced {
+    margin-left: 10px;
+    width:127px;
+  }
+  .button-tracking {
+     margin-left: 10%;
+      width:80%;
+  }
+  .trackingheader {
+    margin-left: 10%;
+    width: 80%;
+ }
 
 }
 /* ++++++++++++++++++++++++++++++++++++++++++
@@ -180,34 +283,98 @@ body {
 /* Layout  for 3 columns and 3 Rows in case of medium screen */
 @media ( min-width: 768px ) {
   body {
+    font-size: 18px;
+  }
+   .displaycolumn{
     font-size: 12px;
+  }
+  .grillecolumn {
+    font-size: 9px;
+  }
+  .comment {
+    font-size: 16px;
   }
   .tracking {
       margin-top: 2%;
       margin-left: 20%;
       width: 60%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 25%;
+      width: 50%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:60%;
+  }
+  .button-trackinginformation {
+      margin-left: 15%;
+      width:70%;
+  }
 .processing {
     font-size: 40px;
     margin-left: 10%;
     width: 80%;
   }
+  .quantityproduced {
+    margin-left: 10px;
+    width:164px;
+  }
+  .button-tracking {
+      margin-left: 15%;
+      width:70%;
+  }
+  .trackingheader {
+    margin-left: 15%;
+    width: 70%;
+ }
 }
 
 @media (min-width:992px) {
   body {
     font-size: 16px;
   }
+  .displaycolumn{
+    font-size: 12px;
+  }
+   .grillecolumn {
+    font-size: 11px;
+  }
   .tracking {
       margin-top: 2%;
-      margin-left: 30%;
-      width: 40%;
+      margin-left: 25%;
+      width: 50%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 31%;
+      width: 38%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:60%;
+  }
   .processing {
     font-size: 40px;
     margin-left: 20%;
     width: 60%;
   }
+  .comment {
+    font-size: 16px;
+   }
+  .logininput {
+     width:40%;
+     margin-left: 30%;
+    }
+  .button-tracking {
+      margin-left: 15%;
+      width:70%;
+  }
+  .trackingheader {
+    margin-left: 15%;
+    width: 70%;
+ }
 }
 
 /* Layout  for 9 columns in case of big screen */
@@ -216,15 +383,53 @@ body {
   body {
     font-size: 18px;
   }
-   .tracking {
+  .displaycolumn{
+    font-size: 14px;
+  }
+  .grillecolumn {
+    font-size: 11px;
+  }
+  .tracking {
       margin-top: 2%;
-      margin-left: 25%;
-      width: 50%;
+      margin-left: 20%;
+      width: 60%;
+    }
+.trackinginquiry {
+      margin-top: 2%;
+      margin-left: 31%;
+      width: 38%;
  }
+ .button-trackinginquiry {
+      margin-left: 24%;
+      width:50%;
+  }
  .processing {
     font-size: 40px;
+    margin-right: 21%;
+    width: 58%;
+  }
+  .logininput {
+      width:40%;
+      margin-left: 30%;
+    }
+ .button-tracking {
+      margin-left: 25%;
+      width:50%;
+  }
+
+  .trackingheader {
     margin-left: 25%;
     width: 50%;
-  }
+ }
+ .producecontent{
+  margin-left: 0%;
+      width: 100%;
+ }
+}
+@media (min-width:1474px) {
+.producecontent {
+    margin-left: 10%;
+    width: 80%;
+}
 }
 

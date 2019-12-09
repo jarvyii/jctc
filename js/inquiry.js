@@ -5,30 +5,7 @@ $(document).ready(function(){
     $('.blinking').fadeOut(500);
     $('.blinking').fadeIn(500);
   }
-  // Add Value to the Machine Input in the Tracking Form
- function AddMachines(){
-       var jsonURL ="../data/machines.json";
-      var usersFormat ={
-                        format: "json"
-                       };
-        // /FUNCTION getHead()
-       function getHead(Data) {
-            $.each(Data,function(i, Order) {
-                $('#machine').append($('<option>',
-                  {
-                     value: Order["machineid"],
-                     text : Order["machdesc"]
-                 }));
 
-                
-              })
-          }  //  \FUNCTION getHead()
-       $.getJSON(jsonURL, usersFormat,  getHead );
- 
-      return false;
-    
-  } //function AddMachines()
-  
 /**********************************************************************************
  Check valid the User and password introduced in Login Form. And setup all INFO in the System.
  FUNCTION  $('#buttonlogin').click(function ())
@@ -60,18 +37,23 @@ function twoChars( Value){
 /***********************************
    Initiate the Production process
 ***********************************/
-//function startProd() 
+//function startProd()
 $('#startprod').click(function (){
-  setInterval(blinker,1000);
-  document.getElementById("startprod").style.display = "none";
-  document.getElementById("stopprod").style.display = "block";
-  //var start = Date.now();
-  var start = new Date();
-  document.getElementById("starttime").value = start;
-  setInterval(function() {
-          
+      setInterval(blinker,1000);
+      document.getElementById("startprod").style.display = "none";
+      document.getElementById("stopprod").style.display = "block";
+      document.getElementById("qtyproduced").disabled = false;
+      /*
+          Write orderqty value to qtyproduced
+          document.getElementById("qtyproduced").value = document.getElementById("orderqty").value;
+      */
+  var startDate = new Date();
+      document.getElementById("starttime").value = startDate.format("Y-m-d H:i:s.u");
+      setInterval(function() {
+
       //var delta = Date.now() - start; // milliseconds elapsed since start
-      var delta = new Date() - start; // milliseconds elapsed since start
+      var nowDate = new Date();
+      var delta = nowDate - startDate; // milliseconds elapsed since start
       //intTime= Math.floor(delta / 1000);
       intTime= Math.round(delta / 1000); // Seconds
       txtSec =  twoChars(intTime % 60);
@@ -88,10 +70,14 @@ $('#startprod').click(function (){
    Stop the Production process
 ***********************************/
 $('#stopprod').click(function (){
- // alert(Date.now());
-   document.getElementById("endtime").value = Date.now();
-   document.getElementById("startprod").style.display = "block";
-  document.getElementById("stopprod").style.display = "none";
+  var nDate = new Date();
+      document.getElementById("endtime").value = nDate.format("Y-m-d H:i:s.u");
+      document.getElementById("startprod").style.display = "block";
+      document.getElementById("stopprod").style.display = "none";
+      /* if (document.getElementById("qtyproduced").value = document.getElementById("orderqty").value){
+         $("#myModal").modal("show");
+      } */
+     // document.getElementById("qtyproduced").disabled = true;
 })
   /************************************************************************
   Main Block
@@ -99,6 +85,14 @@ $('#stopprod').click(function (){
 
   //  document.getElementById("loginform").style.display = "block";
   //  document.getElementById("input-ordercode").style.display = "none";
-  AddMachines(); // Add value element to the SELECT Machine
+
   //setInterval(blinker,1000);
+  if (document.getElementById("typeuser").value == "operator"){
+      document.getElementById("exit-nav").href = "../index.php";
+      //document.getElementById("qtyproduced").disabled = true;
+
+  } else {
+      document.getElementById("exit-nav").href = "../index.php";
+  }
+
  });

@@ -4,7 +4,7 @@ $(document).ready(function(){
       Set the Header  Content of the Tracking Information screen
       seTIBody()
   ************************************/
-  function setOrderHeader( ){ 
+  function setOrderHeader( ){
       var jsonURL ="../data/ehm.json";
       var usersFormat ={
                         format: "json"
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
         $.getJSON(jsonURL, usersFormat,  getHead );
 
-        return false; 
+        return false;
      }   // \FUNCTION setOrderHeader()
   /***********************************
          function setOrderItem( )
@@ -41,7 +41,7 @@ $(document).ready(function(){
                        // Return until find the correct order number
                       return false;
                      }
-                  
+
                      document.getElementById("input-orderqty").value = Order["EIOCQ"];
                      document.getElementById("input-ordercmpted").value = Order["EICCQ"];
                      document.getElementById("input-orderneeded").value = Order["EICCQ"];
@@ -73,7 +73,10 @@ $(document).ready(function(){
    */
   $('#printpdf').click(function () {
      var pdfName = document.getElementById("ordernumber").value+'.pdf';
-    printJS({printable:'/pdf/'+pdfName, type:'pdf', showModal:true})
+     printJS({printable:'jctc/pdf/'+pdfName, type:'pdf', showModal:true})
+
+     //printJS({printable: pdfName, type: 'pdf', base64: true});
+
   })// /('#printpdf').click(function())
 
   /************************************************************************

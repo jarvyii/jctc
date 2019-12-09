@@ -1,35 +1,70 @@
-<?php 
+<?php
 require_once 'class/DataAccess.php';
 require_once 'Views/viewProduction.php';
 require_once 'Views/viewInquiry.php';
 require_once 'Views/ViewTracking.php';
 require_once 'Views/viewTrackingDisplay.php';
-require_once 'Views/viewTrackingInquiry.php'; 
+require_once 'Views/viewTrackingInquiry.php';
 require_once 'Views/viewTrackingInformation.php';
 
+/*************************************************
+       getLocHistory($Order)
+    Return the historic of one order from the table FMLOCHIST
+**************************************************/
+function getLocHistory($OrderNumber, $Line ){
 
-
-function getLocHistory($Order){
-   $db_conn = new DataAccess(); 
-   $tracksLoc = $db_conn ->getTrackLocHistory($Order);
+   $db_conn = new DataAccess();
+   $tracksLoc = $db_conn ->getTrackLocHistory($OrderNumber, $Line);
    echo json_encode($tracksLoc);
-   //return $tracksLoc; 
+   //return $tracksLoc;
 
+}
+
+/********************************************
+     checkOrder($Order)
+    Return if the one specific order exist the Database.
+*********************************************/
+function checkOrder($Order, $Line){
+   $db_conn = new DataAccess();
+   $tracksLoc = $db_conn ->checkOrder($Order, $Line);
+   //var_dump( $tracksLoc);
+   if( $tracksLoc) {
+      echo json_encode($tracksLoc);
+   } else {
+     echo "";
+   }
+
+   //return $tracksLoc;
+
+}
+/****************************************
+        checkOverrideCode($Code)
+ Access the Database to validate the Code to override the production
+ Its called from ControllerInquiry.php
+******************************************/
+function checkOverrideCode($Code){
+   $db_conn = new DataAccess();
+   $Supervisor = $db_conn ->checkOverrideCode($Code); // Return True if the name of supervisor.
+   if( $Supervisor) {
+      echo json_encode($Supervisor);
+   } else {
+     echo "";
+   }
 }
 
 /******************************************************
 Display all info using the Variable:
 $BarCode, $OrderCode, $LineNumber
 *******************************************************/
-function TrackingDisplay($OrderNumber, $LineNumber) {
+function TrackingDisplay($OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item) {
 
     viewTrackingDisplay($OrderNumber, $LineNumber);
-    $Order = new DataAccess(); 
-    $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator);
-    $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator);
-    $tracksLoc = $Order ->getTrackLocHistory($OrderNumber);
-    viewHead( $OrderNumber, $LineNumber, $headOrder, $headOI);
-   
+   // $objData = new DataAccess();
+    //$headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine);
+   // $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
+   // $tracksLoc = $objData ->getTrackLocHistory($OrderNumber);
+    viewHead( $OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item);//$headOI);//$headOrder, $headOI);
+
 
 } //TrackingDisplay
 
@@ -37,15 +72,18 @@ function TrackingDisplay($OrderNumber, $LineNumber) {
 Display the Tracking Information
 ***************************************/
 
-function TrackingInformation ($OrderNumber, $LineNumber, $Operator) {
-   
-   $Order = new DataAccess(); 
-   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Operator);
+function TrackingInformation ($OrderNumber, $Operator) {
+   $Pos = strpos($OrderNumber, "/");;//strpos($Barcode, "/");
+   $Order = substr($OrderNumber,0, $Pos);
+   $LineNumber =  substr($OrderNumber, $Pos+1);
+   $objData = new DataAccess();
+   $headOrder = $objData -> getOrderHeader($Order, $LineNumber);
    //Order Item info.
-   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Operator);
-   viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI);
-      
-      
+   $headOI = $objData ->getOrderItem($Order, $LineNumber);
+   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber );
+   viewTrackingInformation($Order, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
+
+
 }//TrackingInformation ()
 
 /*******************************************************
@@ -54,8 +92,8 @@ Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
 
 function TrackingInquiry( $Operator){
    //( $BarCode, $Machine, $Operator)
- 
-  viewTrackingInquiry( $Operator); //($BarCode, $Machine, $Operator); 
+
+  viewTrackingInquiry( $Operator); //($BarCode, $Machine, $Operator);
 }
 
 
@@ -64,17 +102,30 @@ function TrackingInquiry( $Operator){
 ***************************************/
 function Tracking($UserName) {
    viewTracking($UserName);
-  
+
 }
-function Production($BarCode, $Machine, $Operator) {
-   viewProduction($BarCode, $Machine, $Operator);
-  
+function Production($BarCode, $idMachine, $Operator) {
+   $Pos = strpos($BarCode, "/");
+   $Order= substr($BarCode,0, $Pos);
+   $LineNumber =  substr($BarCode, $Pos+1);
+
+
+   $objData = new DataAccess();
+   $descMachine = $objData->getMachineDesc($idMachine);
+   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber);
+   $headOrder = $objData->getOrderHeader($Order, $LineNumber);
+   //Order Item info.
+   $headOI = $objData ->getOrderItem($Order, $LineNumber);
+   viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
+
 }
-function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime){
-   $Pos = strpos($Barcode, "/");
-   $OrderNumber = substr($Barcode,0, $Pos);
-   $LineNumber =  substr($Barcode, $Pos+1);
-   $Order  = new DataAccess(); 
-   $Order -> insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, 1);
-}
+function endProduction($Param /*$Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty*/){
+   $Pos = strpos($Param["barcode"], "/");;//strpos($Barcode, "/");
+   $Order = substr($Param["barcode"],0, $Pos);
+   $LineNumber =  substr($Param["barcode"], $Pos+1);
+   $Param["order"] =  $Order;
+   $Param["line"] = $LineNumber;
+   $objData  = new DataAccess();
+   $objData -> insertHistoric($Param);
+  }
 ?>

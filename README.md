@@ -74,11 +74,19 @@ Screen will show traveler information necessary to perform job. Inquiry Screen w
 
 5. Create a PHP Class to access all tables in the Database JCTC.
    1. Create the class, define the attributes and methods for the class.
-      1: Class name: DataAccess.
+      1. Class name: DataAccess.
       2. Attribute for the Class: $user, $registered, $server, $pass, $hash.
       3. Methods for the class: connect(), getOrderHeader(), getOrderItem(), getTrackLocHistory(), insertHistoric().
    2. Create the constructor method and the database connection with our SQLite Database.
       1. The constructor name:  __construct( $user=false, $pass=false ).
    3. Code in PHP all access method in the Class.
-6.
-7.
+6. Create a procedure to avoid that the operator produce more items than the quantity in the order.
+   1. Create an Event in Javascript  to check the table the historic of the production in our SQLite Database.
+   2. Create a new method in our DataAccess PHP Class to return the quantity produce with this order and line number.
+
+7. Allow only the Supervisors to authorize less quantity to produce  than the quantity in the order.
+   1. Create in new table with the  field: Code and Supervisor, to have a secret code for each supervisor.
+   2. Implement an Event in JavaScript to validate the quantity produced.
+      1. When the Operator type the quantity produced, the system automatic check his production.
+      2. An event is launched asking the operator for the secret Code to accept this production.
+8. Refactoring.
