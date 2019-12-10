@@ -2,25 +2,36 @@
 INQUIRY Project
 # Inquiry  System Project Plan
 
+Requirement to use the System.
+   - Login:
+          User: ja      password: ja    Level:  Supervisors
+          User: op      password: op    Level:  Operator
+
+   - Secret Code to Override low production:  123456
+
+   -Database System: SQLite
+
 ## What is it
-Its a Website for a plant facility. The customer wants to track where orders and items are as they move thru the plant.  Travelers are a piece of paper displaying all the info on a order and it goes with the item thru the plant.  Each item goes thru several machines depending on the process involved.  
-Screen will show traveler information necessary to perform job. Inquiry Screen will show the movement of each item per order.
+It's a Website for a plant facility. This system has to interact with other system they use. We have to connect and read info from 3 tables of their system.
+The customer wants to track where orders and items are as they move in the plant.  
+The users have to log in the system and we have to different level access:
+  - Operator level: They can access only to produce parts.
+  - Supervisor level: They have access to check any order in the plant and print any info about it.
+
+After the operator finish a part they have to update it in our system. The operator can't produce more parts than ir has in the Order. If for any reason the operator produce less quantity than in the Order. They have to ask the Supervisor to approve this operation typing a secrete code.
+They use a form names "Travelers": Its a form with all info about the order to execute:  Order number, quantity to produce, date, Description, etc. d it goes with the item thru the plant.  Each item goes thru several machines depending on the process involved in the process.  
+
 
 ## Technical Summary
 
-* PHP
-* SQLite
-* HTML, CSS, JavaScript, JQuery, JSON, Bootstrap: For front end
+* Back End: PHP
+* Database system: SQLite
+* Front End:  HTML, CSS, JavaScript, JQuery, JSON, Bootstrap.
 
 ## Features
 
 * Control User
   * Should check user name and password
-  * Show profile information
-    * Email
-    * First Name
-    * Last Name
-
 * Tracking Inquiry Information
   * Fields
     * Scan Bard code
