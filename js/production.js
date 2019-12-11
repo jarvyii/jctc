@@ -48,6 +48,7 @@ function checkProduction(){
         $("#myModal").modal("show");
 
       }
+     document.getElementById("stopprod").disabled = false;  
   }
 	//Begining of the JavaScript body
 	 document.getElementById("qtyproduced").onblur=checkProduction;
@@ -57,4 +58,5 @@ function checkProduction(){
     document.getElementById("startprod").disabled = true;
     alert("You can't process this order bcecause the quantity completed is greater than or equal to the quantity ordered.");
   }
+  document.getElementById("stopprod").disabled = true;
 })

@@ -38,6 +38,6 @@ function  viewTracking($UserName){
         </div>
   </form>
   <?php
-  $newScript = '<script src="../js/tracking.js"></script>';
+  $newScript = '<script src="../js/operator.js"></script>';
   Foot($newScript);
 }

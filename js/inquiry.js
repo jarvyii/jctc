@@ -39,6 +39,7 @@ function twoChars( Value){
 ***********************************/
 //function startProd()
 $('#startprod').click(function (){
+     document.getElementById("stopprod").disabled = true;
       setInterval(blinker,1000);
       document.getElementById("startprod").style.display = "none";
       document.getElementById("stopprod").style.display = "block";

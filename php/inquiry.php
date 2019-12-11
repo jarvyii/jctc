@@ -74,15 +74,22 @@ Display the Tracking Information
 
 function TrackingInformation ($OrderNumber, $Operator) {
    $Pos = strpos($OrderNumber, "/");;//strpos($Barcode, "/");
-   $Order = substr($OrderNumber,0, $Pos);
-   $LineNumber =  substr($OrderNumber, $Pos+1);
-   $objData = new DataAccess();
-   $headOrder = $objData -> getOrderHeader($Order, $LineNumber);
-   //Order Item info.
-   $headOI = $objData ->getOrderItem($Order, $LineNumber);
-   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber );
-   viewTrackingInformation($Order, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
-
+   if ( ($Pos >= 0) and !empty($Pos) ){
+       $Order = substr($OrderNumber,0, $Pos);
+       $LineNumber =  substr($OrderNumber, $Pos+1);
+       if (!empty($LineNumber)){ 
+           $objData = new DataAccess(); 
+           if ( !empty($objData->checkOrder($Order, $LineNumber))) {  
+             $headOrder = $objData -> getOrderHeader($Order, $LineNumber);
+             //Order Item info.
+             $headOI = $objData ->getOrderItem($Order, $LineNumber);
+             $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber );
+             viewTrackingInformation($Order, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
+             return;
+          }
+        }
+     }
+   TrackingInquiry($Operator);
 
 }//TrackingInformation ()
 
@@ -105,21 +112,28 @@ function Tracking($UserName) {
 
 }
 function Production($BarCode, $idMachine, $Operator) {
-   $Pos = strpos($BarCode, "/");
-   $Order= substr($BarCode,0, $Pos);
-   $LineNumber =  substr($BarCode, $Pos+1);
-
-
-   $objData = new DataAccess();
-   $descMachine = $objData->getMachineDesc($idMachine);
-   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber);
-   $headOrder = $objData->getOrderHeader($Order, $LineNumber);
-   //Order Item info.
-   $headOI = $objData ->getOrderItem($Order, $LineNumber);
-   viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
+    $Pos = strpos($BarCode, "/");
+   if ( ($Pos >= 0) and !empty($Pos) ) {
+        $Order= substr($BarCode,0, $Pos);
+        $LineNumber =  substr($BarCode, $Pos+1);
+      if (!empty($LineNumber)) {
+          $objData = new DataAccess();
+          if ( !empty($objData->checkOrder($Order, $LineNumber))) {  
+             $descMachine = $objData->getMachineDesc($idMachine);
+             $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber);
+             $headOrder = $objData->getOrderHeader($Order, $LineNumber);
+             //Order Item info.
+             $headOI = $objData ->getOrderItem($Order, $LineNumber);
+             viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
+             return;
+         }
+      }
+    }
+   viewTracking($Operator);
 
 }
-function endProduction($Param /*$Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty*/){
+/*$Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty*/
+function endProduction($Param ){
    $Pos = strpos($Param["barcode"], "/");;//strpos($Barcode, "/");
    $Order = substr($Param["barcode"],0, $Pos);
    $LineNumber =  substr($Param["barcode"], $Pos+1);
