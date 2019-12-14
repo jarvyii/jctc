@@ -1,5 +1,21 @@
 $(document).ready(function(){
 
+$('#qtyproduced').keypress(function (event){
+  var keycode = (event.keyCode ? event.keyCode: event.wich);
+  if( keycode == '13'){
+    //event.stopPropagation();
+    //alert('Enterrrrrrrr:'+document.getElementById("qtyproduced").value);
+    
+    checkProduction();
+  } 
+})  
+
+$('#qtyproduced').click(function (){
+   document.getElementById("stopprod").disabled =false;
+   //document.getElementById("travelerbutton").disabled =false;
+
+})
+
 /*************************************************
          overrideCode()
    To check the Supervisor Overrride Code. Its used in the view_production(), modal form.
@@ -48,15 +64,16 @@ function checkProduction(){
         $("#myModal").modal("show");
 
       }
-     document.getElementById("stopprod").disabled = false;  
+     //document.getElementById("stopprod").disabled = false;  
   }
 	//Begining of the JavaScript body
-	 document.getElementById("qtyproduced").onblur=checkProduction;
+	document.getElementById("qtyproduced").onblur=checkProduction;
   document.getElementById("override").onblur= overrideCode;
   // Check if qty Produced is equal or  greater than qty Ordered
   if (  parseInt(document.getElementById("qtycmpted").value) >= parseInt( document.getElementById("orderqty").value)) {
     document.getElementById("startprod").disabled = true;
     alert("You can't process this order bcecause the quantity completed is greater than or equal to the quantity ordered.");
   }
-  document.getElementById("stopprod").disabled = true;
+  //document.getElementById("stopprod").disabled = true;
+  document.getElementById("qtyproduced").disabled = true;
 })

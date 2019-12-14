@@ -16,16 +16,16 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
                             }
                             break;
     case 'TrackingInformation':if(isset($_POST['ordernumber']) and isset($_POST['linenumber'])){
-                              $OrderNumber = $_POST['ordernumber'];
-                              $LineNumber = $_POST['linenumber'];
-                              $Customer = $_POST['customer'];
-                              $orderDate = $_POST['orderdate'];
-                              $orderQtty = $_POST['orderqtty'];
-                              $Item =  $_POST['item'];
-                              
-                              TrackingDisplay( $OrderNumber,$LineNumber, $Customer, $orderDate, $orderQtty, $Item);
-                             }
-                            break;
+                                  $OrderNumber = $_POST['ordernumber'];
+                                  $LineNumber = $_POST['linenumber'];
+                                  $Customer = $_POST['customer'];
+                                  $orderDate = $_POST['orderdate'];
+                                  $orderQtty = $_POST['orderqtty'];
+                                  $Item =  $_POST['item'];
+                                  
+                                  TrackingDisplay( $OrderNumber,$LineNumber, $Customer, $orderDate, $orderQtty, $Item);
+                                }
+                              break;
     case 'Display': return ( getLocHistory());  
     case 'Checkorder': return(checkOrder());  
     case 'Production': if(isset($_POST['operator'])) {
